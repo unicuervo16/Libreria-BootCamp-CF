@@ -35,5 +35,29 @@ Para ejecutar este proyecto localmente, necesitarás una instancia de SQL Server
 3. Ejecuta las migraciones para configurar tu base de datos.
 4. Inicia el proyecto con .NET CLI utilizando `dotnet run` en la raíz del proyecto.
 
+
+## Aclaraciones Importantes
+
+Este proyecto ha sido desplegado utilizando el proveedor de hosting gratuito **smarterasp.net**. Dada la naturaleza de este servicio, hay ciertas limitaciones que se reflejan en la experiencia del usuario:
+
+- **Autenticación de Hosting:** Al acceder al sitio por primera vez, se requerirá autenticación para conectar con el hosting. Este es un requisito estándar del proveedor.
+- **Intermitencias en Blazor:** Se han identificado ciertas irregularidades en el funcionamiento de Blazor en el entorno de hosting, afectando elementos como el botón de "Cerrar Sesión".
+
+### Credenciales de Acceso a la Aplicación
+Para explorar la aplicación, puede utilizar las siguientes credenciales:
+- Usuario: `11168622`
+- Contraseña: `60-dayfreetrial`
+
+## Problemas Técnicos y Limitaciones
+
+Durante el desarrollo y despliegue del proyecto, me encontré con varios desafíos:
+
+- **Certificado SSL:** No se logró adquirir un certificado SSL adecuado, lo que puede resultar en advertencias de seguridad en los navegadores web.
+- **Visibilidad Web:** Actualmente, la configuración de privacidad del sitio no ha podido modificarse a través del proveedor de hosting, por lo que la web permanece privada.
+- **Compatibilidad con Blazor:** A pesar de que la aplicación funciona perfectamente en un entorno local, algunas funcionalidades, como la opción de "Cerrar Sesión", no están operativas en el hosting.
+- **Estructura de Base de Datos:** Se enfrentaron retos con las migraciones de base de datos al intentar implementar una tabla intermedia para la asignación de libros a librerías. Esto me llevó a optar por una relación uno a uno para simplificar la solución.
+- **Desarrollo Continuo:** Aunque nos hubiera gustado incorporar características adicionales como imágenes para los libros, mejoras en la interfaz de usuario y la integración con APIs de terceros, el alcance del proyecto y el tiempo disponible limitaron estas extensiones.
+
+
 ## Contribuciones
 Este proyecto fue creado por `Joel Garbagnate` sin participacion de otro alumno del BootCamp, fue un proyecto individual. Agradecimientos a todos los mentores que contribuyeron con su conocimiento y experiencia.
