@@ -1,0 +1,176 @@
+﻿@page "/"
+@inject AuthenticationService AuthenticationService
+@inject NavigationManager NavigationManager
+
+<style>
+    .login-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 10px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 0;
+    }
+
+    .login-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .login-actions {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+        .login-actions .btn {
+            margin-right: 10px;
+        }
+
+        .login-actions .btn-link {
+            text-decoration: none;
+            color: #007bff;
+            margin-left: 10px;
+        }
+
+    .login-background {
+        position: relative;
+        background-image: url('/IMG/books-2606859_1280.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 55vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+        .login-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 1);
+            z-index: -1;
+        }
+
+    .login-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 10px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+        position: relative;
+        z-index: 2;
+    }
+
+    .text-center {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0.6);
+        display: inline;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .form-control {
+        border: 1px solid #ced4da;
+        padding: .375rem .75rem;
+        border-radius: .25rem; 
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 
+        0 0 5px rgba(102, 175, 233, 0.6);
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+        .form-control:focus {
+            border-color: #66afe9;
+            outline: 0;
+            box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+        }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .label {
+        display: block;
+        margin-bottom: .5rem;
+        color: #495057;
+        font-weight: bold;
+        margin-left: 0.5em;
+    }
+
+    .color-texto:hover{
+    color:white;
+    }
+
+</style>
+
+<div class="login-container">
+    <div class="login-background">
+        <h1 class="text-center" style="font-weight:bold; font-size:3em;">Inicio de Sesión</h1>
+    </div>
+    <EditForm Model="@this" OnValidSubmit="@HandleLogin" formname="LoginForm">
+        <div class="form-group">
+            <label class="label" for="email" style="margin-top:0.5em;">Email</label>
+            <InputText id="email" class="form-control" @bind-Value="Email" placeholder="correo@gmail.com" />
+        </div>
+        <div class="form-group">
+            <label class="label"  for="password">Contraseña</label>
+            <InputText id="password" class="form-control" @bind-Value="Password" type="password" placeholder="contra124"/>
+        </div>
+        <div class="login-actions">
+            <button type="submit" class="btn btn-outline-primary">Iniciar sesión</button>
+            <NavLink class="btn btn-outline-info color-texto" href="register-library">Registrarse</NavLink>
+        </div>
+        <br />
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+        {
+            <div class="alert alert-danger text-center">
+                @ErrorMessage
+            </div>
+        }
+    </EditForm>
+</div> 
+
+@code {
+    [SupplyParameterFromForm]
+    private string Email { get; set; }
+    [SupplyParameterFromForm]
+    private string Password { get; set; }
+    private string ErrorMessage { get; set; }
+    [Inject]
+    private IHttpContextAccessor HttpContextAccessor { get; set; }
+    [Inject]
+    public IHttpClientFactory HttpClientFactory { get; set; }
+
+    private HttpClient HttpClient => HttpClientFactory.CreateClient();
+
+
+    private async Task HandleLogin()
+    {
+        var libraryUser = await AuthenticationService.AuthenticateAsync(Email, Password);
+
+        if (libraryUser != null)
+        {
+            var httpContext = HttpContextAccessor.HttpContext;
+            if (httpContext != null)
+            {
+                httpContext.Session.SetInt32("LibraryId", libraryUser.Id);
+            }
+            NavigationManager.NavigateTo("/List");
+        }
+        else
+        {
+            ErrorMessage = "Email o contraseña incorrecta.";
+        }
+    }
+
+    private void NavigateToRegister()
+    {
+        NavigationManager.NavigateTo("/register-library");
+    }
+}

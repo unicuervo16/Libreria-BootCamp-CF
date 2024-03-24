@@ -1,0 +1,211 @@
+﻿@page "/List"
+@inject IBookRepository Repository
+@inject ILibraryRepository LibraryRepository
+@rendermode InteractiveServer
+@inject SessionService SessionService
+@inject NavigationManager Navigation
+@inject HttpClient HttpClient
+@inject AuthenticationService AuthenticationService
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IHttpClientFactory HttpClientFactory
+@inject IJSRuntime JS
+@using SimpleBookCatalog.Controllers;
+
+<PageTitle>
+    Lista de Libros
+</PageTitle>
+<div class="row justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 text-center">
+                <a href="@($"/api/books/library/{libraryId.Value}")" target="_blank" class="btn btn-info">
+                    Ver API sin JWT
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-terminal-dash" viewBox="0 0 16 16" style="margin-top:-1px;">
+                        <path d="M2 3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4a.5.5 0 0 1-1 0V4a1 1 0 0 0-1-1z" />
+                        <path d="M3.146 5.146a.5.5 0 0 1 .708 0L5.177 6.47a.75.75 0 0 1 0 1.06L3.854 8.854a.5.5 0 1 1-.708-.708L4.293 7 3.146 5.854a.5.5 0 0 1 0-.708M5.5 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-5.5 0a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5" />
+                    </svg>
+                </a>
+            </div>
+            <div class="col-md-7 text-center">
+                <h1 class="text-center" style="font-size:50px;">Bienvenido @currentLibrary?.Name</h1>
+            </div>
+            <div class="col-md-3 text-end">
+                <button @onclick="Logout" class="btn btn-danger shadow-none mb-3">
+                    Cerrar Sesión <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16" style="margin-top:-1px;">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="col-md-12 text-end">
+                <a href="add-new" class="btn btn-primary shadow-none mb-3">
+                    Nuevo
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16" style="margin-top:-1px;">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="col-md-2">
+                <h3 class="text-center">Gráficos de la Librería</h3>
+                <div class="chart-container">
+                    @if (booksByCategory != null && booksByCategory.Count > 0)
+                    {
+                        <canvas id="bookChartBar"></canvas>
+                        <canvas id="bookChartPie"></canvas>
+                    }
+                    else
+                    {
+                        <div class="text-center">No hay datos para mostrar.</div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                @if (books is null)
+                {
+                    <div class="book-item text-center">
+                        Cargando libros...
+                    </div>
+                }
+                else if (books.Any())
+                {
+                    foreach (var book in books)
+                    {
+                        <BookCard Book="book" OnBookDeleted="BookDeleted" />
+                    }
+                }
+                else
+                {
+                    <div class="book-item text-center col-md-8">
+                        No se encontraron libros.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private Library currentLibrary;
+    private List<Book>? books;
+    private Dictionary<Category, int> booksByCategory;
+    private int? libraryId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        libraryId = HttpContextAccessor.HttpContext.Session.GetInt32("LibraryId");
+        if (libraryId.HasValue && libraryId > 0)
+        {
+            currentLibrary = await LibraryRepository.GetByIdAsync(libraryId.Value);
+
+            books = await Repository.GetByLibraryIdAsync(libraryId.Value);
+            booksByCategory = books
+                .GroupBy(b => b.Category)
+                .ToDictionary(g => g.Key, g => g.Count());
+        }
+        else
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+
+    private async Task CreateChartDataAndRenderCharts()
+    {
+        if (booksByCategory != null && booksByCategory.Count > 0)
+        {
+            var chartData = booksByCategory
+              .Select(bc => new { Category = bc.Key.ToString(), Count = bc.Value })
+              .ToList();
+
+            await JS.InvokeVoidAsync("createCharts", chartData);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await CreateChartDataAndRenderCharts();
+    }
+
+    //Verifico si el usuario esta autenticado
+    private bool EstáAutenticado()
+    {
+        var httpContext = HttpContextAccessor.HttpContext;
+        return httpContext != null && httpContext.Session.GetInt32("LibraryId").HasValue;
+    }
+    //Cargo los Libros
+    private async Task LoadBooks(int libraryId)
+    {
+        books = await Repository.GetByLibraryIdAsync(libraryId);
+        StateHasChanged();
+    }
+    //Elimino un libro
+    private async Task BookDeleted(int bookId)
+    {
+        await LoadBooks(libraryId.Value);
+        StateHasChanged();
+    }
+    //Cierro Sesion (No funciona en el servidor, creo)
+    public async Task Logout()
+    {
+        await JS.InvokeVoidAsync("logout");
+    }
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    window.createCharts = (data) => {
+        console.log(data);
+        const categories = data.map(item => item.category);
+        const counts = data.map(item => item.count);
+        const colors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(255, 159, 64, 0.5)'
+        ];
+
+        while (colors.length < categories.length) {
+            colors.push(`rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.5)`);
+        }
+
+        // Crea el gráfico de barras
+        const ctxBar = document.getElementById('bookChartBar').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: 'Cantidad de Libros',
+                    data: counts,
+                    backgroundColor: colors
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+
+        // Crea el gráfico circular
+        const ctxPie = document.getElementById('bookChartPie').getContext('2d');
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: categories,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: colors
+                }]
+            }
+        });
+    };
+</script>

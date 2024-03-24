@@ -1,0 +1,26 @@
+body[b-sk25e463ow] {
+}
+.confirm-dialog-container[b-sk25e463ow]{
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background-color:rgb(0,0,0,0.5);
+    z-index:2000;
+}
+.confirm-dialog[b-sk25e463ow]{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-width:20rem;
+    padding:2rem;
+    border-radius:1rem;
+    background-color:white;
+    margin-top:1.5rem;
+    position:fixed;
+}

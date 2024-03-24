@@ -1,0 +1,101 @@
+﻿@page "/add-new"
+@inject IBookRepository Repository
+@inject NavigationManager Navigation
+
+<PageTitle>
+    Agregar Nuevo Libre
+</PageTitle>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <EditForm Enhance="true" method="post" FormName="AddBookForm" OnValidSubmit="AddBook" Model="Book" autocomplete="off">
+            <h3>
+                Agregar Nuevo Libro
+            </h3>
+            @*Ttitulo del Libro*@
+            <div class="mb-3">
+                <label for="title" class="form-label">Titulo</label>
+                <InputText id="title" @bind-Value="Book.Title" class="form-control shadow-none"></InputText>
+            </div>
+            @*Autor*@
+            <div class="mb-3">
+                <label for="author" class="form-label">Autor</label>
+                <InputText id="author" @bind-Value="Book.Author" class="form-control shadow-none"></InputText>
+            </div>
+            @*Fecha de Publicacion*@
+            <div class="mb-3">
+                <label for="publication-date" class="form-label">Fecha de Publicación</label>
+                <InputDate id="publication-date" @bind-Value="Book.PublicationDate" class="form-control shadow-none"></InputDate>
+            </div>
+            @*Descripcion*@
+            <div class="mb-3">
+                <label for="description" class="form-label">Descripción</label>
+                <InputText id="description" @bind-Value="Book.Description" class="form-control shadow-none"></InputText>
+            </div>
+            @*Cantidad de Páginas*@
+            <div class="mb-3">
+                <label for="pagecount" class="form-label">Cantidad de Páginas</label>
+                <InputNumber id="pagecount" @bind-Value="Book.PageCount" class="form-control shadow-none" TValue="int?"></InputNumber>
+            </div>
+            @*Categoria*@
+            <div class="mb-3">
+                <label for="category" class="form-label">Categoría</label>
+                <InputSelect id="category" @bind-Value="Book.Category" class="form-control shadow-none">
+                    <option value="0">
+                        Seleccionar Categoría
+                    </option>
+                    @foreach(var category in Enum.GetValues(typeof(Category)))
+                    {
+                        <option value="@category">
+                            @category.ToString()
+                        </option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary shadow-none">Enviar</button>
+                <a href="/" class="btn btn-secondary shadow-none ms-3">
+                    Volver a la Lista
+                </a>
+            </div>
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+            @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+            {
+                <div class="alert alert-danger">
+                    @ErrorMessage
+                </div>
+            }
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    public Book Book { get; set; } = new();
+
+    [Inject]
+    public IHttpContextAccessor HttpContextAccessor { get; set; }
+
+    private string ErrorMessage { get; set; }
+
+    private async Task AddBook()
+    {
+        int? libraryId = HttpContextAccessor.HttpContext.Session.GetInt32("LibraryId");
+
+        if (!libraryId.HasValue)
+        {
+            ErrorMessage = "Por favor, inicia sesión para agregar un libro.";
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        Book.LibraryId = libraryId.Value;
+        await Repository.AddAsync(Book);
+        Navigation.NavigateTo("/List");
+
+    }
+}
+
+
+

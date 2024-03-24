@@ -1,0 +1,88 @@
+﻿@page "/edit/{id:int}"
+@inject IBookRepository Repository
+@inject NavigationManager Navigation
+
+<PageTitle>Editar Libro</PageTitle>
+
+@if(Book is not null)
+{
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <EditForm Enhance="true" method="post" FormName="EditBookForm" OnValidSubmit="EditBook" Model="Book" autocomplete="off">
+                <h3>
+                    <u>Editar Libro:</u> @Book.Title
+                </h3>
+                <input type="hidden" name="Book.Id" value="@Book.Id"/>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Titulo</label>
+                    <InputText id="title" @bind-Value="Book.Title" class="form-control shadow-none"></InputText>
+                </div>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Autor</label>
+                    <InputText id="author" @bind-Value="Book.Author" class="form-control shadow-none"></InputText>
+                </div>
+                <div class="mb-3">
+                    <label for="publication-date" class="form-label">Fecha de Publicación</label>
+                    <InputDate id="publication-date" @bind-Value="Book.PublicationDate" class="form-control shadow-none"></InputDate>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <InputText id="description" @bind-Value="Book.Description" class="form-control shadow-none"></InputText>
+                </div>
+                <div class="mb-3">
+                    <label for="pagecount" class="form-label">Cantidad de Páginas</label>
+                    <InputNumber id="pagecount" @bind-Value="Book.PageCount" class="form-control shadow-none" TValue="int?"></InputNumber>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Categoría</label>
+                    <InputSelect id="category" @bind-Value="Book.Category" class="form-control shadow-none">
+                        <option value="0">
+                            Seleccionar Categoría
+                        </option>
+                        @foreach (var category in Enum.GetValues(typeof(Category)))
+                        {
+                            <option value="@category">
+                                @category.ToString()
+                            </option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary shadow-none">Enviar</button>
+                    <a href="/" class="btn btn-secondary shadow-none ms-3">
+                        Volver a la Lista
+                    </a>
+                </div>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+            </EditForm>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    public Book? Book { get; set; }
+
+    [Inject]
+    public IHttpContextAccessor HttpContextAccessor { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Book ??= await Repository.GetByIdAsync(Id);
+    }
+
+    private async Task EditBook()
+    {
+        if(Book is not null)
+        {
+            int? libraryId = HttpContextAccessor.HttpContext.Session.GetInt32("LibraryId");
+            Book.LibraryId = (int)libraryId;
+            await Repository.UpdateAsync(Book);
+            Navigation.NavigateTo("/List");
+        }
+    }
+}

@@ -1,0 +1,79 @@
+﻿@page "/register-library"
+@inject ILibraryRepository Repository
+@inject NavigationManager Navigation
+
+<style>
+.form-control {
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+@@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 1s ease-in-out;
+}
+
+</style>
+<PageTitle>Registra tu propia librería!</PageTitle>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Registra tu librería</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <EditForm method="post" Model="Library" OnValidSubmit="HandleRegistration" FormName="LibraryForm">
+                <div class="form-group mb-3">
+                    <label for="name">Nombre de la librería</label>
+                    <InputText id="name" @bind-Value="Library.Name" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="address">Dirección</label>
+                    <InputText id="address" @bind-Value="Library.Address" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="email">Email</label>
+                    <InputText id="email" @bind-Value="Library.Email" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password">Contraseña</label>
+                    <InputText id="password" @bind-Value="Library.Password" class="form-control" type="password" />
+                </div>
+                <div class="d-grid gap-2 d-md-block text-center">
+                    <button type="submit" class="btn btn-primary col-md-4">Registrar</button>
+                    <NavLink class="btn btn-secondary col-md-4" href="/">Volver</NavLink>
+                </div>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    public Library Library { get; set; } = new();
+
+    private async Task HandleRegistration()
+    {
+        PasswordHasher<Library> passwordHasher = new PasswordHasher<Library>();
+        Library.Password = passwordHasher.HashPassword(Library, Library.Password);
+        Library.IsActive = true;
+        Library.CreationDate = DateTime.Now;
+
+        await Repository.AddAsync(Library);
+        Navigation.NavigateTo("/List");
+    }
+}

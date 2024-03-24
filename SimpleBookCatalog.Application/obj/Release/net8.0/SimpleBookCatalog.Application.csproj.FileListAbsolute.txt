@@ -1,0 +1,15 @@
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\bin\Release\net8.0\SimpleBookCatalog.Application.deps.json
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\bin\Release\net8.0\SimpleBookCatalog.Application.dll
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\bin\Release\net8.0\SimpleBookCatalog.Application.pdb
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\bin\Release\net8.0\SimpleBookCatalog.Domain.dll
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\bin\Release\net8.0\SimpleBookCatalog.Domain.pdb
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\SimpleBookCatalog.Application.csproj.AssemblyReference.cache
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\SimpleBookCatalog.Application.GeneratedMSBuildEditorConfig.editorconfig
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\SimpleBookCatalog.Application.AssemblyInfoInputs.cache
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\SimpleBookCatalog.Application.AssemblyInfo.cs
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\SimpleBookCatalog.Application.csproj.CoreCompileInputs.cache
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\SimpleBookCatalog.Application.csproj.CopyComplete
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\SimpleBookCatalog.Application.dll
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\refint\SimpleBookCatalog.Application.dll
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\SimpleBookCatalog.Application.pdb
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Application\obj\Release\net8.0\ref\SimpleBookCatalog.Application.dll

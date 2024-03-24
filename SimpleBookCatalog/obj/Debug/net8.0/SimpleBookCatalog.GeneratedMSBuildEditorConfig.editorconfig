@@ -1,0 +1,71 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SimpleBookCatalog
+build_property.RootNamespace = SimpleBookCatalog
+build_property.ProjectDir = J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog
+build_property._RazorSourceGeneratorDebug = 
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/Auth/LibraryRegistration.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoXExpYnJhcnlSZWdpc3RyYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/Auth/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoXExvZ2luLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/Pages/AddNew.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZGROZXcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/Pages/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/BookCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xCb29rQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-sfkud7e8ku
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/ConfirmDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb25maXJtRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-sk25e463ow
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-8fmw8g4rsz
+
+[J:/C\# .NET/Proyectos/Repos/LibreriaProyectoBootcap/SimpleBookCatalog/Components/Pages/List.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-o9mggqwfk3

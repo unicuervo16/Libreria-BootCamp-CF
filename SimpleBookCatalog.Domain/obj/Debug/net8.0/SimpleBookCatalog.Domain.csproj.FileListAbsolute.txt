@@ -1,0 +1,12 @@
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\bin\Debug\net8.0\SimpleBookCatalog.Domain.deps.json
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\bin\Debug\net8.0\SimpleBookCatalog.Domain.dll
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\bin\Debug\net8.0\SimpleBookCatalog.Domain.pdb
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\SimpleBookCatalog.Domain.csproj.AssemblyReference.cache
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\SimpleBookCatalog.Domain.GeneratedMSBuildEditorConfig.editorconfig
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\SimpleBookCatalog.Domain.AssemblyInfoInputs.cache
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\SimpleBookCatalog.Domain.AssemblyInfo.cs
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\SimpleBookCatalog.Domain.csproj.CoreCompileInputs.cache
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\SimpleBookCatalog.Domain.dll
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\refint\SimpleBookCatalog.Domain.dll
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\SimpleBookCatalog.Domain.pdb
+J:\C# .NET\Proyectos\Repos\LibreriaProyectoBootcap\SimpleBookCatalog.Domain\obj\Debug\net8.0\ref\SimpleBookCatalog.Domain.dll
