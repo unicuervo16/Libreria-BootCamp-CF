@@ -1,5 +1,7 @@
-# Librería Project Bootcamp CódigoFacilito
-
+<h1 align="center">Librería Projecto Bootcamp CódigoFacilito</h1>
+<p align="center">
+  <img src="https://codigofacilito.com/assets/codys/cody_thinking-0c05231ba09a4c632952602216983caaacb9a208a593cba9bc913341236e030a.png" alt="Cody Thinking">
+</p>
 Este proyecto es el resultado de mi participación en el Bootcamp de CódigoFacilito, diseñado para demostrar las habilidades adquiridas y la aplicación práctica de diversas tecnologías y metodologías en el desarrollo de software. La librería digital permite a los usuarios registrarse, iniciar sesión, y acceder a una variedad de recursos y funcionalidades.
 
 ## Tecnologías y Herramientas Utilizadas
